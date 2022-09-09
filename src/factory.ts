@@ -1,37 +1,16 @@
-import { BigInt } from "@graphprotocol/graph-ts"
 /* eslint-disable prefer-const */
-import { NomiswapFactory, Pair, Token, Bundle } from "../generated/schema";
+import { Pair, Token } from "../generated/schema";
 import { Pair as PairTemplate } from "../generated/templates";
 import { PairCreated } from "../generated/Factory/Factory";
 import {
-  FACTORY_ADDRESS,
   ZERO_BD,
   ZERO_BI,
-  ONE_BI,
   fetchTokenSymbol,
   fetchTokenName,
   fetchTokenDecimals,
 } from "./utils";
 
 export function handlePairCreated(event: PairCreated): void {
-  let factory = NomiswapFactory.load(FACTORY_ADDRESS);
-  if (factory === null) {
-    factory = new NomiswapFactory(FACTORY_ADDRESS);
-    factory.totalPairs = ZERO_BI;
-    factory.totalTransactions = ZERO_BI;
-    factory.totalLiquidityBNB = ZERO_BD;
-    factory.totalVolumeUSD = ZERO_BD;
-    factory.untrackedVolumeUSD = ZERO_BD;
-    factory.totalLiquidityUSD = ZERO_BD;
-
-    let bundle = new Bundle("1");
-    bundle.bnbPrice = ZERO_BD;
-    bundle.save();
-  }
-  
-  factory.totalPairs = factory.totalPairs.plus(ONE_BI);
-  factory.save();
-
   let token0 = Token.load(event.params.token0.toHex());
   if (token0 === null) {
     token0 = new Token(event.params.token0.toHex());
