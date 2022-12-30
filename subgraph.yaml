@@ -1,4 +1,4 @@
-specVersion: 0.0.4
+specVersion: 0.0.5
 description: Nomiswap is the first decentralized exchange platform on the market with a binary referral system and the lowest platform transaction fees (0.1%).
 repository: https://github.com/unchase-subgraphs/nomiswap-subgraph
 schema:
@@ -13,7 +13,7 @@ dataSources:
       startBlock: 13908914
     mapping:
       kind: ethereum/events
-      apiVersion: 0.0.6
+      apiVersion: 0.0.7
       language: wasm/assemblyscript
       entities:
         - Pair
@@ -39,7 +39,7 @@ templates:
       abi: Pair
     mapping:
       kind: ethereum/events
-      apiVersion: 0.0.6
+      apiVersion: 0.0.7
       language: wasm/assemblyscript
       file: ./src/core.ts
       entities:
